@@ -1,0 +1,3293 @@
+
+
+
+
+Cardinal SAP ABAP Naming Standards
+
+
+
+
+
+
+
+
+
+
+
+
+
+Signatures
+
+
+Author:
+Date:
+
+_____________________
+Ferdi Mulyadi
+(Sr. Software Engineer, Medical Core Systems)
+
+
+_______________
+Approved By:
+Date:
+
+_____________________
+Parag Chansarkar
+(Manager, Medical Core Systems)
+
+
+_______________
+
+
+
+
+
+Revision History
+Date
+Person Responsible
+Version
+Reason for Change
+01/28/2009
+Keith Okrzesik
+1.0
+Updated from Existing OGTP Standards
+04/22/2009
+Chuck Gemereth
+1.1
+Add missing objects.
+10/19/2009
+Keith Okrzesik
+1.2
+Updated Web Dynpro, Enhancements, Switch, and some other minor
+01/07/2010
+Keith Okrzesik
+1.4
+Updated Application Areas
+2/24/2010
+Keith Okrzesik
+1.5
+Added Auth Group naming standard
+4/13/2010
+Keith Okrzesik
+1.6
+Added CRM Enhancement Set
+5/15/2013
+Hemanth Mekala
+1.7
+Updates to existing standards
+10/8/2014
+Chuck Gemereth
+1.8
+Added naming standard for pricing objects
+3/12/2017
+Ferdi Mulyadi
+1.9
+Add signatures and update version
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Signatures	1
+Naming Formats - Introduction	7
+Overview	7
+Applicability	7
+Package	8
+Package (formerly development class)	8
+Data Dictionary	9
+Data table	9
+Data table field	9
+Data table index	11
+View	11
+Table type	12
+Structure	12
+Append structures	13
+Data element	13
+Domain	14
+Search help	14
+Lock	15
+Logical database	15
+Table Maintenance Generator	16
+ABAP Editor	17
+Program	17
+Program constant	17
+Program work area (structure)	18
+Program parameter	19
+Program select-option	19
+Program variable	20
+Program internal table	20
+Program class object	21
+Program Interface Object	22
+Class	22
+Local Interface	23
+Data object	24
+Data type	24
+Field Symbols	25
+Form parameters	25
+Screen	26
+Include programs	26
+Subroutine pools	27
+Module pool for dialog (include)	27
+Transaction code	28
+Function Builder	29
+Function group	29
+Function module	29
+Function module parameters	30
+Class Builder	31
+Class (Standard)	31
+Class (Exception)	31
+Class (Interface)	32
+Method parameters	33
+Web Dynpro for ABAP	33
+Web Dynpro Generated Code	33
+Web Dynpro Component	33
+Web Dynpro Component Interface	34
+Web Dynpro Application	34
+Web Dynpro Context Elements	35
+Web Dynpro View Elements	36
+Web Dynpro Elements	37
+Web Dynpro All Other Elements	37
+SAP Enhancement Framework	37
+Validation and substitution exit	37
+CMOD project	38
+BAdI (Classic) Implementation	38
+BAdI (Classic) Definition	39
+Enhancement Spot	39
+BAdI (New) Definition	39
+Enhancement Implementation	40
+BAdI (New) Implementation	40
+Explicit enhancement	41
+Implicit enhancement	41
+BTE Product	42
+BTE Function Module	43
+CRM Enhancement Set	44
+BSP Enhancement Component	44
+Switch Framework	45
+Switch	45
+Business Function	45
+Transformation Builder	46
+Description	46
+Simple Transformation	46
+XSL Transformation	47
+Menu Painter	48
+GUI status	48
+GUI title	48
+Area menu	48
+General Business Forms	49
+SapScript / Smartform	49
+Program (SapScript/SmartForm)	49
+SapScript styles	50
+Smartforms style	50
+Fonts	51
+Graphics	51
+Standard text ID	52
+Standard text name	53
+Adobe Form Interface	53
+Adobe Form	54
+Business Object Repository (BOR)	55
+Description	55
+Business object type	55
+Business interface type	56
+Method	57
+Method parameters	57
+BAPI	58
+Workflow	58
+Standard Task	58
+Task Group	59
+Workflow Template	59
+SAP Query	60
+Description	60
+Electronic data exchange (EDI) / Intermediate document (IDoc)	61
+Description	61
+Partner Profile (WE20)	61
+Port (WE21)	62
+Partners	62
+Logical System (BD54)	62
+Message type	63
+Idoc Extension	63
+Electronic data exchange (EDI) / Intermediate document (IDoc), Continued	64
+Idoc Logical Message	64
+Idoc Segment	64
+Idoc Type	64
+Inbound Process Code (WE42)	65
+Inbound IDoc function module	65
+Outbound IDoc function module	66
+File	67
+Overview	67
+Inbound file	67
+Outbound file	67
+Authorizations	68
+Authorization field	68
+Authorization object	68
+Authorization group (for tables SE54)	68
+Authorization group (for report programs SE38)	69
+Jobs	70
+Batch input session	70
+Batch job	70
+Business Object	71
+Event (job execution)	71
+Event (Objects)	71
+Misc.	72
+Memory storage ID	72
+Message Class	72
+TVARV entry	73
+Variant	73
+Appendix A	74
+Appendix B	75
+Appendix C	76
+Appendix D	76
+
+
+Naming Formats - Introduction
+
+Overview
+This document should be used to determine how to name any particular object developed by Cardinal using the ABAP development environment.  The goal of these standards are to provide quality, consistency, and maintainability without hampering the development process as well as allowing future releases of the SAP application to be implemented without impact.
+
+Applicability
+* All personnel doing development within SAP are required to read and follow these standards.
+* If standards do not exist for the object that you are creating, contact the document owners (listed at the top) to determine the standards to follow.
+* SAP and third-party generated code is not required to meet these naming standards.  Third-party generated code is still required to undergo a code review to ensure no performance (or other) issues will be introduced with the code.
+
+
+Package
+
+Package (formerly development class)
+When creating a package, the object name:
+* Must begin with ‘ZM’    Can be a maximum of 30 characters.   
+* The Basis Team will create all packages
+* Organizational criterion for managing repository objects that are grouped together into packages by topic. Packages are connected to the Correction and Transport System and to repository objects themselves. As of release 6.10, they replace development classes and enhance this concept in line with the requirements of the SAP NetWeaver Application Server. Packages are created using the Package Builder. 
+* Usage: A package is a container for objects that logically belong together.  One Package will be created for each SAP major module in use.  In addition, a special enhancement package will be created for each SAP major module to hold and enhancement objects (User Exits, Customer Exits, BADI implementations, etc.).  All objects destined for production must be assigned to an appropriate package.  If an object will never move to production, it can be created as a local object ($TMP)
+Format: ZMXX_XXXXXXXXXXXXXXXXXXXXXXXXX
+Example:  ZMSTS_DEVELOP, ZOTC_ENHANCE, ZOTC_VERTEX
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Component
+Appendix ‘A’
+1
+Separator
+‘_’ (optional)
+25-26
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Note: Objects inside a namespace require a development class of the namespace.  The opposite is true for objects outside the namespace. Please assign object to a package according to what type of solution it provides.
+
+Note: In enterprise edition development class has been converted to a package.  In contrast to its predecessor, the development class, a package has the following additional characteristics: 
+* Packages can be nested.
+* Packages can contain their 'visible development objects' (visible outside of the package) in package interfaces.
+* Packages can have use access defined for other package interfaces.
+
+
+Data Dictionary
+
+Please note, all data dictionary changes should preferably be maintained in its own transports and should always avoid combining with any workbench object or customization changes
+
+Data table
+When creating a data storage table, the object name:
+* Must begin with ‘ZMT’
+* Can be a maximum of 16 characters.
+* Usage: Used to store custom data in the system.   
+Format: ZMT XX DDDDDDDDDDD
+Example:  ZMTSTSDLPATH
+Length 
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+1
+Table Designator
+‘T’ – designates a table
+Note: ‘S’ designates a structure
+2-3
+Application Area
+Appendix ‘A’
+11-12
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Data table field
+When creating a data storage table field, the object name:
+* Can be a maximum of 30 characters.   
+* Must be unique within a table definition
+* Wherever possible, use the same name as the data element associated with this field.  If multiple fields in the table use the same data element, create a name to describe the field.  Use an existing SAP-defined data element where appropriate.  If it is not possible to use an existing data element and/or domain, create a new one as defined in this document.  In that case, the table field name must begin with a ‘ZM’.  Table fields added to SAP standard tables via an append structure must start with ZZM.
+* Execute caution when adding data types on the fields; it is not advisable to make changes to the data types after initial creation.  Activation process will attempt to change the data to the modified data types, potentially corrupting the data.  If possible, a cleaner way would be to delete and recreate the field.  In unavoidable situations, partner with basis/dba resources to make a backup of the table before making any adjustments to the table on data type changes.
+
+Format: DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD  
+Example:  ZMAVGSTDCOST
+Length
+Description
+Values
+30
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+ Data Dictionary, Continued
+
+Data table index
+When creating a data storage table index, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 3 characters.  
+* Indexes are created by the Basis Team 
+* Indexes should always be in it’s own transport and should not be combined with any other Workbench or Customizing changes
+
+Format: ZM N  
+Example:  ZM1
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+1
+Sequential Number
+Numeric
+
+
+View
+When creating a view, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 16 characters. 
+* Grouping of columns in one or more database tables according to application-specific criteria. In an ABAP-based SAP system, views are defined in the ABAP Dictionary and can be referenced as data types like flat structures. Views can be used like database tables in read Open SQL statements.   
+Format: ZM XX _ XXXXXXXXXX 
+Example:  ZMOTC_VBAK_TO_MARA
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+10-11
+Table Identifier
+Primary table used in the view 
+
+
+Data Dictionary, Continued
+
+Table type
+When creating a table type, the object name:
+* Must begin with ‘ZMU’
+* Can be a maximum of 30 characters.   
+* Usage: In earlier releases of SAP, a function module could receive a table reference as a parameter.  The function module could modify that table and return it to the calling routine.  With Netweaver, a table type must be passed as a “changing” parameter to do the equivalent work.
+Format: ZM UXX DDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMUCTC_SLS_TAB
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+1
+Table Type designator
+‘U’ – is used to designate a table type
+Note: ‘T’ is used to designate a table
+2-3
+Application Area
+Appendix ‘A’
+24-25
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Structure
+When creating a structure, the object name:
+* Must begin with ‘ZMS’
+* Can be a maximum of 30 characters.   
+* Usage: A structure is defined like a table in the ABAP dictionary and can be access from within ABAP programs.  A change in the definition of the structure in the ABAP dictionary automatically takes effect in all programs.  Structures are used to define the data at the interface of module pools and screens and to define the parameter types of function modules.
+Format: ZM SXX DDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMSFI_AR_OVERDUE_NOTICES
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+1
+Structure designator
+‘S’ – is used to designate a structure
+Note: ‘T’ is used to designate a table
+2-3
+Application Area
+Appendix ‘A’
+24-25
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Data Dictionary, Continued
+
+Append structures
+
+Structure in the ABAP Dictionary that is appended to another structure or a database table so as to add further components. Standard structures and database tables delivered by SAP can be enhanced by means of append structures in customer systems. 
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+* Usage: For adding fields to SAP structures
+Format: ZM SXX DDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMSOTC_VBAP_MATERIAL_ATTRIBUTE
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+1
+Structure indicator
+‘S’ - to indicate this object is a structure.
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator (OPTIONAL)
+‘_’
+24
+Descriptive Text
+<description> - The name should include the table name that the append structure is for.  Additional information should be added to the table name.
+
+Data element
+When creating a data element, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+* Usage: A data element describes the role of a domain within a table or structure.  Fields with the same meaning refer to the same data element.  The format specifications for a data element are copied from the domain.  
+Format: ZM DDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMAVLVENDOR
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+28
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+Data Dictionary, Continued
+
+Domain
+When creating a domain, the object name:
+A domain describes the technical attributes of a data object (field), such as the data type or the number of positions in a field. The domain defines primarily a value range describing the valid data values for the fields referring to this domain. Domains can also be checked against value tables or be assigned a check table depending on the usage for the domain. They are normally referenced by many data elements, which allows for consistency across development objects in use of the field. Domains have a maximum length of 30 characters. If you must create a custom one, data elements have a maximum length of 30 characters.
+
+Format: ZM DDDDDDDDDDDDDDDDDDDDDDDDDDD  
+Example:  ZMUSERID
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+28
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Search help
+When creating a search help, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+Format: ZM  DDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZM_OLD_CUSTOMER_NUMBER
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+28
+Unique Identifier
+Alphanumeric.  Underscores are valid. It is recommended the name include the table name or development object the lock applies.
+
+
+
+Data Dictionary, Continued
+
+Lock
+When creating a lock, the object name:
+* Must begin with ‘EZM_’
+* Can be a maximum of 16 characters.   
+* Usage: A lock object specifies data records that can be locked using the SAP logical locking system.  The object can either be a physical object (a record in a table) or a logical object (a collection of records, possibly from different tables).  Locks are set and released by calling function modules which are automatically generated from the definition of lock objects in the ABAP dictionary.
+Format: EZM _ XXXXXXXXXXXX
+Example: EZM_MARA
+Length
+Description
+Values
+3
+Custom identifier
+‘EZM’
+1
+Separator
+‘_’
+12
+Primary table
+Name of the primary table in the primary table field of the Lock Object create screen
+
+Logical database
+When creating a logical database, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 20 characters.   
+Format: ZMXX DDDDDDDDDDDDDDD   
+Example:  ZPPTRANSORDERS
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+15-16
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+Data Dictionary, Continued
+
+
+Table Maintenance Generator
+
+Table maintenance generator allows developers to easily create means to interactively create/change/display data in tables/views.  The tool is accessed via transaction SE54 or through SE11. The table maintenance process generates the code and screens behind the scenes along with security and enhancement capabilities.   The table maintenance uses a function module group as a repository for all the logic.
+* Three main items are involved with table maintenance:
+Function group
+* Screens
+* Authorization group
+The function group name may only be 15 characters in length.  If using a single function group for a table it is recommended to include the name of the table/view in the name of the function group. 
+The screens used should follow the screen conventions. It is recommended that screens 0100, 1000, 8000-8999 and 9000-9999 are not used for the actual maintenance screens.
+
+ABAP Editor
+
+Program
+When creating a program name, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.
+* Use SE80, ABAP workbench to create/edit programs   
+* Please refer to ABAP coding standards for additional information
+Format: ZM XXX _ DDDDDDDDDDDDDDDDDDDDD
+Example:  ZMFI_AR_AGING REPORT
+                 ZMCTC_SALES_PRICE_INTERFACE
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+25-26
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Program constant
+When creating a program constant, the program object:
+* Must begin with ‘G’ if it is global to the program or ‘L’ if it is local to a sub-section of the program (FORM, METHOD, etc.)
+* The second character must be ‘C’
+* Can be a maximum of 30 characters.   
+* Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+Format: SC_DDDDDDDDDDDDDDDDDDDDDDDDDDD 
+Example:  GC_DATUM
+Length
+Description
+Values
+1
+Variable Scope
+‘G’ or ‘L’
+1
+Constant Identifier
+‘C’  From Appendix D
+1
+Separator
+‘_’
+27
+Constant Label
+Alphanumeric.  Underscores are valid.
+
+
+ABAP Editor, Continued
+
+Program work area (structure)
+When creating a field group, the program object:
+* Must begin with ‘G’ if it is global to the program or ‘L’ if it is local to a sub-section of the program (FORM, METHOD, etc.)
+* The second character must be ‘X’ 
+* Can be a maximum of 30 characters.   
+* Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+Format: SX_DDDDDDDDDDDDDDDDDDDDDDDDDDD 
+Example:  LX_SVC_ORDERS
+Length
+Description
+Values
+1
+Variable Scope
+‘G’ or ‘L’
+1
+Work Area Identifier
+’X’  From Appendix D
+1
+Separator
+‘_’
+27
+Constant Label
+Alphanumeric.  Underscores are valid.
+
+
+ABAP Editor, Continued
+
+Program parameter
+When creating a parameter, the program object:
+* Must begin with ‘P’
+* Can be a maximum of 8 characters.   
+* Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+Format: P_DDDDDD 
+Example:  P_SITEID
+Length
+Description
+Values
+1
+Parameter Identifier
+‘P’
+1
+Separator
+‘_’
+6
+Parameter Label
+Alphanumeric.  Underscores are valid.
+
+Program select-option
+When creating a select-option, the program object:
+* Must begin with ‘S’
+* Can be a maximum of 8 characters.   
+* Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+Format: S_DDDDDD  
+Example:  S_WERKS
+Length
+Description
+Values
+1
+Select-option Identifier
+‘S’
+1
+Separator
+‘_’
+6
+Select-Option Label
+Alphanumeric.  Underscores are valid.
+
+
+ABAP Editor, Continued
+
+Program variable
+When creating a program variable name, the program object:
+* Must begin with ‘G’ if it is global to the program or ‘L’ if it is local to a sub-section of the program (FORM, METHOD, etc.)
+* The second character must be ‘V’
+* Can be a maximum of 30 characters.   
+* Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+Format: SV_DDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  LV_OVERFLOW_FLAG
+Length
+Description
+Values
+1
+Variable Scope
+‘G’ or ‘L’
+1
+Variable Identifier
+‘V’  From Appendix D
+1
+Separator
+‘_’
+27
+Variable Label
+Alphanumeric.  Underscores are valid.
+
+Program internal table
+When creating an internal table name, the program object:
+* Must begin with ‘G’ if it is global to the program or ‘L’ if it is local to a sub-section of the program (FORM, METHOD, etc.)
+* The second character must be ‘T’
+* Can be a maximum of 30 characters.  
+* Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+Format: ST_DDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  GT_VBAP
+Length
+Description
+Values
+1
+Variable Scope
+‘G’ or ‘L’
+1
+Table Identifier
+‘T’  From Appendix D
+1
+Separator
+‘_’
+27
+Variable Label
+Alphanumeric.  Underscores are valid.
+
+
+ABAP Editor, Continued
+
+Program class object
+When creating an object program variable name, the program object:
+* Must begin with ‘G’ if it is global to the program or ‘L’ if it is local to a sub-section of the program (FORM, METHOD, etc.)
+* The second character must be ‘O’
+* Can be a maximum of 30 characters.   
+* Where it makes sense, include the name of the class in the object name.  Otherwise use a meaningful description.
+Format: SO_DDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  GO_ZCL_CURRENCY_CONVERSION
+Length
+Description
+Values
+1
+Variable Scope
+‘G’ or ‘L’
+1
+Object Identifier
+‘O’  From Appendix D
+1
+Separator
+‘_’
+27
+Variable Label
+Alphanumeric.  Underscores are valid.
+
+Program Interface Object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Class
+
+
+When creating an interface program variable name, the name:
+o Must begin with ‘G’ if it is global to the program or ‘L’ if it is local to a sub-section of the program (FORM, METHOD, etc.)
+o The second and third characters must be ‘IF’
+o Can be a maximum of 30 characters.   
+o Where it makes sense, include the name of the class in the object name.  Otherwise use a meaningful description.
+
+Format: SIF_DDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  LIF_CURRENCY_CONVERSION
+
+Length
+Description
+Values
+1
+Variable Scope
+‘GM’ or ‘LM’
+2
+Object Identifier
+‘IF’ from Appendix D
+1
+Separator
+‘_’
+26
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+When defining a class in a program, the name:
+o Must begin with ‘G’ if it is global to the program or ‘L’ if it is local to a sub-section of the program (FORM, METHOD, etc.)
+o The second and third characters must be ‘CL’ (or ‘CX’ for exception classes)
+o Can be a maximum of 30 characters.   
+
+Format: LCLDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  LCL_BACKORDER_REPORT
+
+Length
+Description
+Values
+1
+Variable Scope
+‘G’ or ‘L’
+2
+Local Class Identifier
+‘CL’ or ‘CX’
+27
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Local Interface
+
+
+When defining an interface in a program, the name:
+o Must begin with ‘G’ if it is global to the program or ‘L’ if it is local to a sub-section of the program (FORM, METHOD, etc.)
+o The second and third characters must be ‘IF’
+o Can be a maximum of 30 characters.   
+
+Format: LIFDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  LIF_REPORT
+
+Length
+Description
+Values
+1
+Variable Scope
+‘G’ or ‘L’
+2
+Local Interface Identifier
+‘IF’
+27
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+Data object
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Data type
+
+
+
+When creating a program data object, the program object:
+o Must begin with ‘G’ if it is global to the program or ‘L’ if it is local to a sub-section of the program (FORM, METHOD, etc.)
+o The second and third characters must be ‘DO’
+o Can be a maximum of 30 characters.   
+o Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+
+Format: SDO_DDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  LDO_KNA1_DATA
+
+Length
+Description
+Values
+1
+Variable Scope
+‘G’ or ‘L’
+2
+Data Object Identifier
+‘DO’ from Appendix D
+1
+Separator
+‘_’
+26
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+When creating a program data type, the program object:
+o Must begin with ‘G’ if it is global to the program or ‘L’ if it is local to a sub-section of the program (FORM, METHOD, etc.)
+o The second and third characters must be ‘TY’
+o Can be a maximum of 30 characters.   
+o Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+
+Format: STY_DDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  GTY_VBAK_BACKORDERS
+
+Length
+Description
+Values
+1
+Variable Scope
+‘G’ or ‘L’
+2
+Data Type Identifier
+‘TY’
+1
+Separator
+‘_’
+26
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+
+
+Field Symbols
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Form parameters
+
+
+When creating a field symbol, the program object:
+o Must begin with ‘G’ if it is global to the program or ‘L’ if it is local to a sub-section of the program (FORM, METHOD, etc.)
+o Should be followed with the appropriate program object identifier from Appendix D
+o Can be a maximum of 30 characters.   
+o Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+
+Format: <SXX_DDDDDDDDDDDDDDDDDDDDDDDD>
+Example:  <GX_VBAP>
+
+Length
+Description
+Values
+1
+Variable Scope
+‘G’ or ‘L’
+1-2
+Program Object Identifier
+From Appendix D
+1
+Separator
+‘_’
+26-27
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+When creating a form parameter, the name will default to beginning with ‘P’
+o Should be followed appropriate program object identifier from Appendix D
+o Can be a maximum of 30 characters. 
+o Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+
+Format: PXX_DDDDDDDDDDDDDDDDDDDDDDDDDDDD 
+Example:  PX_VBAK
+
+Length
+Description
+Values
+1
+Form Parameter Identifier
+‘P’
+1-2
+Program Object Identifier
+From Appendix D
+1
+Separator
+‘_’
+26-27
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+
+
+
+Screen
+When creating a screen number, the screen object:
+* Must begin within range of 9000-9999
+* Can be a maximum of 4 characters.   
+Format: 9NNN 
+Example:  9000
+Length
+Description
+Values
+4
+Screen Identifier
+9000-9999
+
+Include programs
+When creating an include program name, the program object:
+* Used to define common data objects and/or logic which may be incorporated in many other programs by reference via the ABAP command ‘INCLUDE <report name>.
+* Program names can be a maximum of 40 characters in length.   
+* The naming standard used for custom developed INCLUDEs is the same as that for custom developed executable reports and programs, except a suffix is used.
+Format: ZMAALP_DDDDDDDDDDDDDDDDDDDDDDDDDDDDD_SSS
+Example:  ZMCTC_SALES_T00
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-4
+Application Area
+Appendix ‘A’
+31-33
+Descriptive Text
+<description> - The name should include the table name that the append structure is for.  Additional information should be added to the table name.
+3
+Suffix (Optional)
+Defined suffixes are:
+TOP: Contains the report name and any data declaration
+SEL:  Contains the report selection screen definition.
+T00 – TXX: Additional data declarations
+F00 – FXX: Contains all logics and subroutines of the program
+M00 – MXX: Macro definitions
+C00 – CXX: Class definitions
+O00 – OXX: Logica for PBO modules
+I00 – IXX: Logical for PBO modules
+H00 – HXX: for user Value Request (Help) modules.
+
+
+ABAP Editor, Continued
+
+Subroutine pools
+When creating subroutine pool name, the program object:
+* Type S programs are not executable, you cannot start them using a transaction code or by entering the program name. They are containers for common subroutines, which you can call externally from other ABAP programs. They cannot contain screens.
+* Program names can be a maximum of 40 characters in length.   
+* The naming standard used for custom developed Subroutine Pools is the similar to the conventions for custom executable programs.
+Format: ZMAANP_DDDDDDDDDDDDDDDDDDDDDDDDDDDDD_SSS
+Example:  ZMCTC_SALES_SUBROUTINE_POOL
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-4
+Application Area
+Appendix ‘A’
+34-36
+Descriptive Text
+<description> - The name should include the table name that the append structure is for.  Additional information should be added to the table name.
+
+Module pool for dialog (include)
+When creating a module pool for dynpro, the object name:
+* Must begin with ‘SAPMZM’
+* Can be a maximum of 40 characters.   
+* Usage: The module pool is the program underlying one or more dialog transactions.
+Format: SAPMZM XX  _ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD 
+Example:  SAPMZMFI_AP_PAYMENTS
+Length
+Description
+Values
+6
+Custom Identifier
+‘SAPMZM’
+2-3
+Application Identification
+Appendix ‘A’
+1
+Separator
+‘_’
+30-31
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+
+
+
+
+ABAP Editor, Continued
+
+
+Transaction code
+When creating a transaction code, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 20 characters.  Note: can only be a maximum of 12 characters, if a batch input session is created.  
+Format: ZM XX DDDDDDDDDDDDDDDD 
+Example:  ZMCTCUSERSTAT
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+15-16
+Unique Identifier
+Alphanumeric  
+
+Function Builder
+
+Function group
+When creating a function group, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 26 characters.   
+Format: ZM XX _ DDDDDDDDDDDDDDDDDDDDDD  
+Example:  ZMFI_PAYMENTS
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+20-21
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Function module
+When creating a function module, the object name:
+* Must begin with ‘Z_M’
+* Can be a maximum of 30 characters.   
+Format: Z_M XX _ DDDDDDDDDDDDDDDDDDDDDDDD 
+Example:  Z_MFI_AP_PAYMENT_CALC
+Length
+Description
+Values
+3
+Custom Identifier
+‘Z_M’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+23-24
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+Function Builder, Continued
+
+Function module parameters
+When creating a function module interface parameter, the object name:
+* Must begin with ‘I’, ‘E’, or ‘C’ to denote Importing, Exporting, or Changing.  
+* NOTE the Tables statement is obsolete in the ABAP Objects context and should be avoided in all areas when possible.  Instead a data dictionary object table type can be created to pass tables as importing, exporting, or changing.
+* Can be a maximum of 30 characters.   
+* Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+* Function Module parameters added to standard SAP function modules via the Enhancement Framework must begin with ZZ, then follow the standard naming guidelines (i.e. ZZI_KUNNR, ZZE_VBELN, etc.)
+Format: TXX_DDDDDDDDDDDDDDDDDDDDDDDDDDDD 
+Example:  IV_KUNAG
+
+Length
+Description
+Values
+1
+Parameter Type
+‘I’, ‘E’, or ‘C’
+1-2
+Program Object Identifier
+From Appendix D
+1
+Separator
+‘_’
+26-27
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+Class Builder
+
+Class (Standard)
+When creating a class (object), the object name:
+* Must begin with ‘ZCLM_’
+* Template for objects in ABAP Objects. Defined with CLASS - ENDCLASS, either globally in a class pool or locally in an ABAP program of your choice. The definition of a class comprises a declaration section for the declaration of the class components and an implementation part for the implementation of the methods.
+* Can be a maximum of 30 characters.   
+Format: Z CLM _ XX_DDDDDDDDDDDDDDDDDDDDDD  
+Example:  ZCLM_GL_GENERAL_LEDGER_ACCOUNT
+Length
+Description
+Values
+1
+Custom Identifier
+‘Z’
+3
+Class Object Id
+‘CLM’
+1
+Separator
+‘_’
+2-3
+Application Area
+See Appendix A
+1
+Separator
+‘_’
+21-22
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Class (Exception)
+When creating an exception class, the object name:
+* Must begin with ‘ZCXM_’
+* Treatable exception, which is represented by an exception object of an exception class. Class-based exceptions replace catchable runtime errors and non-class-based exceptions
+* Can be a maximum of 30 characters.   
+Format: Z CXM _ XX_DDDDDDDDDDDDDDDDDDDDDD  
+Example:  ZCXM_GL_GENERAL_LEDGER_ACCOUNT
+Length
+Description
+Values
+1
+Custom Identifier
+‘Z’
+3
+Class Object Id
+‘CXM’
+2-3
+Application Area
+See Appendix A
+23-24
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Class (Interface)
+
+When creating an interface class, the object name:
+* Must begin with ‘ZIFM_’
+* Template for the public interface of classes. Defined with INTERFACE - ENDINTERFACE, either globally in an interface pool, or locally in another ABAP program. An interface contains the declaration of interface components, but does not contain method implementations. Can be implemented in classes using INTERFACES, which enhances the external interface of the class by adding the interface components.
+* Can be a maximum of 30 characters.   
+
+Format: Z IFM _ XX_DDDDDDDDDDDDDDDDDDDDDD  
+Example:  ZIFM_GL_GENERAL_LEDGER_ACCOUNT
+
+
+Length
+Description
+Values
+1
+Custom Identifier
+‘Z’
+3
+Class Object Id
+‘IFM’
+2-3
+Application Area
+See Appendix A
+23-24
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+
+
+Method parameters
+
+
+When creating a method interface parameter, the object name:
+o Must begin with ‘I’, ‘E’, ‘C’, or ‘R’ to denote Importing, Exporting, Changing, or Returning
+o Should be followed with the appropriate program object identifier from Appendix D
+o Can be a maximum of 30 characters. 
+o Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+o Method parameters added to standard SAP classes via the Enhancement Framework must begin with ZZ, and then follow the standard naming guidelines (i.e. ZZI_KUNNR, ZZE_VBELN, etc.)
+
+Format: TXX_DDDDDDDDDDDDDDDDDDDDDDDDDDDD 
+Example:  EV_KUNAG
+
+Length
+Description
+Values
+1
+Parameter Type
+‘I’, ‘E’, ‘C’, or ‘R’
+1-2
+Program Object Identifier
+From Appendix D
+1
+Separator
+‘_’
+26-27
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Web Dynpro for ABAP
+Web Dynpro Generated Code
+Web Dynpro Component
+
+
+
+Since Web Dynpro provides various tools and wizards to generate code for method calls, accessing context elements, etc., any generated code by SAP is not required to meet the Cardinal code naming standards
+
+
+When creating a Web Dynpro Component, the object name:
+o Must begin with ‘ZMC’
+o Can be a maximum of 25 characters.   
+
+Format: ZMCXXDDDDDDDDDDDDDDDDDDDD
+Example:  ZMCOTC_CUSTOMER_MAINT
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+1
+Component Identifier
+‘C’
+2-3
+Application Area
+See Appendix A
+19-20
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Web Dynpro Component Interface
+
+
+When creating a Web Dynpro Component, the object name:
+o Must begin with ‘ZMI’
+o Can be a maximum of 25 characters.   
+
+Format: ZMIXXDDDDDDDDDDDDDDDDDDD
+Example:  ZMIOTC_CUSTOMER_MAINT
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+1
+Interface Identifier
+‘I’
+2-3
+Application Area
+See Appendix A
+19-20
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+
+Web Dynpro Application
+When creating a Web Dynpro Application, the object name:
+o Must begin with ‘ZMA’
+o Can be a maximum of 25 characters.   
+
+Label for a Web Dynpro application The label can consist of alphanumeric characters and the special characters Underscore (_) and Slash (/). The slash (/) serves to delimit the namespace prefix from the rest of the label. The label must not begin with a digit.
+
+The label can contain both uppercase and lowercase letters. However, the label is not case-sensitive. Labels that differ only with respect to their uppercase/lowercase letters are therefore considered to be identical.
+
+Format: ZMAXXDDDDDDDDDDDDDDDDDDD
+Example:  ZMAOTC_CUSTOMER_MAINT
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+1
+Application Identifier
+‘A’
+2-3
+Application Area
+See Appendix A
+19-20
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+
+Web Dynpro Context Elements
+
+
+All context elements not generated by SAP or imported from a data dictionary structure should use the following prefixes for the context names followed by an appropriate description (such as the ABAP dictionary name).
+
+CN - Context node
+CCN - Context child node
+CA - Context attribute
+
+
+Web Dynpro View Elements
+
+
+All view elements should use the following list of prefixes followed by a descriptive name.
+
+View Element
+ID Prefix
+BusinessGraphics
+BGR_
+Button
+BTN_
+ButtonRow
+BTR_
+Caption
+CPT_
+DropDownByIndex
+DDI_
+DropDownByKey
+DDK_
+FileUpload
+FUD_
+Group
+GRP_
+HorizontalGutter
+HOG_
+InputFIeld
+INP_
+InteractiveForm
+IFO_
+Label
+LBL_
+LinkToAction
+LTA_
+LinkToURL
+LTU_
+RadioButton
+RBT_
+RadioButtonGroupByIndex
+RBI_
+RadioButtonGroupByKey
+RBK_
+RoadMap
+RMP_
+RoadMapStep
+STP_
+Table
+TBL_
+TextEdit
+TXE_
+TextView
+TXV_
+TimedTrigger
+TTR_
+TransparentContainer
+TCO_
+Tray
+TRY_
+Tree
+TRE_
+TreeNodeType
+TNT_
+TreeItemType
+TIT_
+ViewContainerUIElement
+VCU_
+
+
+
+
+
+
+Web Dynpro Elements
+
+
+
+All Web Dynrpo elements should use the following list of prefixes followed by a descriptive name.
+
+Element
+ID Prefix
+Window
+W_
+View
+V_
+Inbound Plug
+IP_<source view>
+Outbound Plug
+OP_<target view>
+
+
+Web Dynpro All Other Elements
+
+
+
+All other Web Dynpro elements should follow the ABAP Editor Program naming conventions listed in this document for variables, constants, etc.
+
+
+
+SAP Enhancement Framework
+
+
+Validation and substitution exit 
+
+
+When creating validation or substitution exit names, the form object:
+* Must begin with ‘ZM’
+* Validation and substitution rules are applied to business processes at certain call points within the transaction.  The rules either validate or substitute data, as the names imply.  To enhance functionality, code can be called from these call points.  The new code added to a subroutine in the program and the rules reference the subroutine where needed.
+* Can be a maximum of 8 characters.   
+Format: ZMDDDDDD
+Example:  ZMVALSUB
+
+Length
+Description
+Values
+2
+Form Identifier
+‘ZM’
+6
+Enhancement Name
+Original Enhancement name
+
+
+
+
+CMOD project
+When creating a class (object), the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 8 characters.   
+Format: ZM XX DDD  
+Example:  ZMOTCGLTD
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+3-4
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+BAdI (Classic) Implementation 
+
+
+When creating a classic business add-in implementation, the object:
+o Must begin with ‘ZM’
+o Business Add-Ins (BAdIs) are object oriented enhancements to the standard SAP functionality. They are inserted by SAP to accommodate user requirements too specific to be included in the standard delivery.   An application developer who wishes to have a Business Add-In in a particular program defines the interface for an enhancement in the BAdI Builder.  
+o Can be a maximum of 20 characters.   
+o The implementing class should follow the class naming standards.
+
+Format: ZM_DDDDDDDDDDDDDDDDD
+Example:  ZMOTC_CLASSIC_ADD_IN
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+15-16
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+
+BAdI (Classic) Definition
+
+Classic BAdIs should no longer be created.  As of NW 7.0, the new Kernal BAdIs should be used instead.  These are created inside of an enhancement spot.
+
+
+
+
+Enhancement Spot
+
+
+When creating an enhancement spot, the object name:
+o Must begin with ‘ZM’
+o Can be a maximum of 30 characters.   
+o Enhancement spots are components of a tree structure hierarchy, of which the branches represent composite enhancement spots and the leaves are simple enhancement spots.  Explicit enhancement points/sections and new (kernel) BAdIs must be assigned to an enhancement spot.
+
+Format: ZMXXXDDDDDDDDDDDDDDDDDDDDDDDDD  
+Example:  ZMOTC_MOVE_VBAK
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+25-26
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+BAdI (New) Definition	
+
+
+
+When creating a new BAdI definition, the object name:
+o Must begin with ‘ZM’
+o Can be a maximum of 30 characters.
+o The BAdI class should follow the class naming standards.
+
+Format: ZMXXXDDDDDDDDDDDDDDDDDDDDDDDDD 
+Example:  ZMOTC_MOVE_VBAK_SET_AUGRU
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+25-26
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Enhancement Implementation
+
+
+When creating an enhancement implementation, the object name:
+o Must begin with ‘ZM’
+o Can be a maximum of 30 characters.
+o Implementations of New BADIs must be created in an enhancement implementation.  Each BADI implementation belongs to only one enhancement implementation, but each enhancement implementation can have more than one BADI implementation. For ease of maintenance, it is best to limit each enhancement implementation to a single BADI definition.  If the BADI is defined to allow multiple implementations, it is best to create all implementations in a single enhancement implementation.
+
+Format: ZMXXXDDDDDDDDDDDDDDDDDDDDDDDDD  
+Example:  ZMOTC_ARC_SD_VBAK_CHECK
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+25-26
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+BAdI (New) Implementation
+
+
+When creating a Kernel BADI implementation, the object name:
+o Must begin with ‘ZM’
+o Can be a maximum of 30 characters.
+o Implementations of New BADIs must be created in an enhancement implementation.  Each BADI implementation belongs to only one enhancement implementation, but each enhancement implementation can have more than one BADI implementation. For ease of maintenance, it is best to limit each enhancement implementation to a single BADI definition.  If the BADI is defined to allow multiple implementations, it is best to create all implementations in a single enhancement implementation.
+o The BAdI implementing class should follow the class naming standards.
+
+Format: ZMXXXDDDDDDDDDDDDDDDDDDDDDDDDD  
+Example:  ZMOTC_ARC_SD_VBAK_CHECK_01
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+25-26
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+
+
+Explicit enhancement 
+
+
+When creating an explicit enhancement name, the form object:
+* Must begin with ‘ZM’
+* Explicit enhancements, also known as New BAdIs. Enhancement options are positions in repository objects where enhancements can be made. These options explicitly defined (by the SAP via enhancement spot). Explicit enhancement options are generally defined in a central initial system. Explicit enhancement spots which are then used via an implementation.  
+* Can be a maximum of 40 characters.   
+Format: ZMAAA_DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMOTC_EXPLICIT_ENHANCEMENT
+Length
+Description
+Values
+2
+Form Identifier
+‘ZM’
+2-3
+Application Area 
+Appendix ‘A’
+35-36
+Descriptive Text
+Descriptive/meaning name
+
+Implicit enhancement 
+
+When creating an implicit enhancement name, the form object:
+* Must begin with ‘ZM’
+* Implicit enhancements, also known as New BAdIs. Enhancement options are positions in repository objects where enhancements can be made. These options exist implicitly (such as the end of the program).   Unlike explicit enhancements, no enhancement spots are required for implicit enhancement options.  Implicit enhancement options always exist and do not require enhancement spots. They are also enhanced by enhancement implementations.  
+* Can be a maximum of 40 characters.   
+Format: ZMAAA_DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMOTC_IMPLICIT_ENHANCEMENT
+Length
+Description
+Values
+2
+Form Identifier
+‘ZM’
+2-3
+Application Area 
+Appendix ‘A’
+335-36
+Descriptive Text
+Descriptive/meaning name
+
+
+
+BTE Product
+
+When creating a Product for a Business Transaction Event (BTE), the object name:
+o Must begin with ‘ZM’
+o Can be a maximum of 8 characters.
+o New products should be created at a granular enough level to allow activation / deactivation for a common group of events.  For example one product can be created for the events:
+o 00504001	Customer material info record created
+o 00504002	Customer material info record has been changed
+o 00504003	Customer material info record has been deleted
+
+Format: ZMDDDDDD
+Example:  ZMKDMAT
+
+Length
+Description
+Values
+1
+Custom Identifier
+‘ZM’
+6
+Descriptive Text
+Alphanumeric.  Underscores are valid.
+
+
+BTE Function Module
+
+When creating a Product for a Business Transaction Event (BTE), the object name:
+o Must begin with ‘Z’
+o Can be a maximum of 30 characters.
+o BTE's should be implemented by copying the sample interface to a custom function module and implementing your logic inside of this function module following the standard ABAP development guidelines.  The copied function module should follow the naming standard of replacing SAMPLE with Z_MBTE.  If the BTE is a Publish/Subscribe interface that can have multiple implementations, a counter should be added to the end of the new custom function module name.
+
+Format: Z_MBTE_DDDDDDDDDDDDDDDDDDDDD_##
+Example:  
+SAMPLE_INTERFACE_0001130 becomes Z_MBTE_INTERFACE_0001130_01
+  SAMPLE_PROCESS_00001051 becomes Z_MBTE_PROCESS_00001051
+
+Length
+Description
+Values
+1
+Custom Identifier
+‘Z’
+1
+Separator
+‘_’
+4
+Function module BTE identifier
+‘MBTE’
+21
+BTE Interface or Process name
+Copied from sample interface and BTE event ID
+3
+Counter for Publish/Subscribe BTE’s
+‘_##’
+
+
+CRM Enhancement Set
+
+An enhancement set contains the enhancement definition that shows the assigned BSP application and the assigned runtime repository.
+
+You can define as many enhancement sets as you like, but only one enhancement set is active at runtime.
+
+When creating a CRM Enhancement Set, the object name:
+o Must begin with ‘Z’
+o Can be a maximum of 30 characters.
+
+Format: ZDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:   ZENH_SET
+
+Length
+Description
+Values
+1
+Custom Identifier
+‘Z’
+29
+Free Form Description
+
+
+
+
+BSP Enhancement Component  
+
+When creating a BSP Enhancement Component, the object name:
+o Must begin with ‘Z’
+o Can be a maximum of 30 characters.
+
+Format: ZDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:   ICCMP_INBOX component is enhanced as ZICCMP_INBOX
+
+Length
+Description
+Values
+1
+Custom Identifier
+‘Z’
+29
+Standard Component Name
+
+
+
+Switch Framework
+Switch
+
+
+When creating a switch, the object name:
+o Must begin with ‘ZM’ and can be a maximum of 30 characters.   
+o The Basis Team will create all switches
+o A Repository object that, in the context of the Switch Framework, determines whether another Repository object is visible and used in a system. This also applies in particular to an enhancement of the enhancement concept. A switch can have one of the following statuses: on, off or stand-by. Switches are created in transaction SFW1 and switched in transaction SFW5 via Business Functions.
+
+Format: ZMAAA_XXXXXXXXXXXXXXXXXXXXXXXXX
+Example:  ZMOTC_ENHANCEMENTS
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Component
+Appendix ‘A’
+1
+Separator
+‘_’
+24-25
+Unique Identifier
+Alphanumeric.  Underscores are valid
+
+Business Function
+
+When creating a business function, the object name:
+o Must begin with ‘ZM’ and can be a maximum of 30 characters.   
+o The Basis Team will create all business functions
+o Repository object that represents a self-contained (business) function within the scope of the Switch Framework. Several business functions are pooled to form a Business Function Set. Technically, a business function is a pool of switches that serve the same function. When you switch on a business function, the corresponding switches are switched on. Business functions are created in transaction SFW2 and switched in transaction SFW5.
+Format: ZMAAA_XXXXXXXXXXXXXXXXXXXXXXXXX
+Example:  ZMOTC_ENHANCEMENTS
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Component
+Appendix ‘A’
+1
+Separator
+‘_’
+24-25
+Unique Identifier
+Alphanumeric.  Underscores are valid
+
+
+
+
+
+
+
+ Transformation Builder
+
+Description
+The transformation builder allows developers to build transformations which handle the conversion XML and ABAP data from/to other sources.  Meaning, the transformation moves data from one data object to another data object.  For example from an ABAP internal table to an XML structure or an XML structure to an ABAP object, etc … The transformation builder is a structural editor where development is conducted via mapping within a true of data objects.  Transformation have two basic types; 
+* Simple transformations
+* XSL transformations
+The type of transformation controls the functionality available within the transformation.
+* From XML to XML (for XSLT only) 
+* From XML to ABAP (for XSLT and Simple Transformations) 
+* From ABAP to XML (for XSLT and Simple Transformations) 
+From ABAP to ABAP (for XSLT only).
+
+Simple Transformation
+When creating a simple transformation name, the program object:
+* Must begin with ‘ZM’
+* Simple Transformations (ST) is an SAP programming language for describing transformations between ABAP data and XML formats. ST is restricted to the two modes of serialization (ABAP to XML) and deserialization (XML to ABAP) of ABAP data, which are most important for data integration. Transformations from ABAP to ABAP and XML to XML, like in the more general XSL transformation<LINK> are not possible in ST.
+* Program names can be a maximum of 40 characters in length.
+Format: ZMAAAS_DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMCTCS_SIMPLE_TRANSFORMATION
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-4
+Application Area
+Appendix ‘A’
+1
+Transformation Type
+‘S’
+33-35
+Descriptive Text
+<description> - The name should include the table name that the append structure is for.  Additional information should be added to the table name.
+
+
+Transformation Builder, Continued
+
+XSL Transformation
+When creating an XSL transformation name, the program object:
+* Must begin with ‘ZM’
+* An XSL (Extensible Stylesheet Language) transformation is a program in the Repository that is written in XSLT (Extensible Stylesheet Language Transformation, www.w3.org/TR/xslt) and used for the transformation of XML documents.  In other words, the XSL transformation allows developers to translate XML/ABAP data structures from/to other data structures using XSL editor.
+* Program names can be a maximum of 40 characters in length.
+Format: ZMAAAX_DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMCTCX_XSL_TRANSFORMATION
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-4
+Application Area
+Appendix ‘A’
+1
+Transformation Type
+‘X’
+33-35
+Descriptive Text
+The name should include the table name that the append structure is for.  Additional information should be added to the table name.
+
+
+Menu Painter
+
+GUI status
+When creating a GUI status, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 20 characters.   
+Format: ZM _ DDDDDDDDDDDDDDDDD
+Example:  ZM_ZIRM03_GUI_STATUS
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+1
+Separator
+‘_’
+17
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+GUI title
+When creating a GUI title, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 20 characters.   
+Format: ZM _ DDDDDDDDDDDDDDDDD
+Example:  ZM_ZIRM003_GUI_TITLE
+Length
+Description
+Values
+1
+Custom Identifier
+‘ZM’
+1
+Separator
+‘_’
+17
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Area menu
+When creating an area menu, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+Format: ZM XX _ DDDDDDDDDDDDDDDDDDDDDDDDD  
+Example:  ZMSTS_SERPTH
+Length 
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+24-25
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+General Business Forms
+
+SapScript / Smartform
+
+When creating a SapScript/SmartForm name, the form object:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+Format: ZM XX _DDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMOTC_ORDER_ACK
+Length
+Description
+Values
+2
+Form Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+24-25
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Program (SapScript/SmartForm)
+When creating a program name (Sapscript/SmartForm), the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+Format: ZM XXX FM_DDDDDDDDDDDDDDDDDDD
+Example:  ZMOTCFM_INVOICE
+                 ZMOTCFM_ORDER_CONFIRM
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+2
+Application Type
+‘FM’
+1
+Separator
+‘_’
+22-23
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+General Business Forms, Continued
+
+SapScript styles
+
+When creating a SapScript style name, the form object:
+* Must begin with ‘ZM’
+* The style contains various formatting elements which the user can apply to the document to control text formatting.  In order to make the elements in the text accessible, the appropriate style must be allocated to the text. In the SAPscript standard text editor, this occurs via a menu selection. Maintained using transaction SE72.
+* Can be a maximum of 8 characters.   
+Format: ZMAA _DDD
+Example:  ZMOTC_CG
+Length
+Description
+Values
+2
+Form Identifier
+‘ZM’
+2
+Application Area
+Appendix ‘A’
+4
+Descriptive Text
+Descriptive/meaning name for the form
+2
+Language Designation (Optional)
+In some countries, two versions of the form must be sent.
+
+Smartforms style
+
+When creating a smartforms style name, the form object:
+* Must begin with ‘ZM’
+* You specify the style in the output options of the form attributes. In the output options of particular form subobjects you can assign a different style, which overrules the general style. This style is used for all subnodes of the subobject until again another style is specified. Maintained using transaction SMARTSTYLES.
+* Can be a maximum of 30 characters.   
+Format: ZMAAA _DDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMOTC_SMARTFORMS_STYLE_EN
+Length
+Description
+Values
+2
+Form Identifier
+‘ZM’
+2
+Application Area
+Appendix ‘A’
+26
+Descriptive Text
+Descriptive/meaning name for the form
+2
+Language Designation (Optional)
+In some countries, two versions of the form must be sent.
+
+
+General Business Forms, Continued
+
+Fonts
+When creating a Font, the object name:
+* Must begin with ‘ZM’
+* Maintained with transaction SE73.  This area controls the technical designation of the fonts via print control language, etc...  Creation of fonts is not a common practice, thus the convention has not been deeply researched.   
+Format: ZM_DDDDDDDD
+Example:  ZM_FONTS
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+
+Descriptive Text
+Descriptive/meaning name for the form
+
+Graphics
+
+When creating a graphics name, the form object:
+* Must begin with ‘ZM’
+* You use the administration of form graphics to import, administer, and transport graphics, and to display them (for example, company logos, and material images) in a print preview. Graphics are maintained with transaction SE78.
+* Can be a maximum of 70 characters.   
+Format: ZMAAA_CO_DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMOTC_CO_GRAPHICS
+Length
+Description
+Values
+2
+Form Identifier
+‘ZM’
+2
+Application Area
+Appendix ‘A’
+2
+Graphic Type
+Color (CO), Black and White (BW)
+64
+Descriptive Text
+Descriptive/meaning name
+
+
+General Business Forms, Continued
+
+Standard text ID
+When creating a standard text ID, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 4 characters.   
+Format: ZM XX  
+Example:  ZM05
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2
+Unique Identifier
+Alphanumeric.   
+
+Standard text name
+When creating a standard text name, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+Format: ZM DDDDDDDDDDDDDDDDDDDDDDDDDDDD  
+Example:  ZMCARDINALPURCHASEORDER
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+28
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+Adobe Form Interface
+
+
+When creating a PDF form interface, the object name:
+o Must begin with ‘ZM’
+o Can be a maximum of 30 characters.   
+
+Format: ZMXXIF_DDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMOTCIF_ORDER_ACK
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+2
+Application Type
+‘IF’
+1
+Separator
+‘_’
+22-23
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+
+
+Adobe Form
+
+
+When creating a PDF form, the object name:
+o Must begin with ‘ZM’
+o Can be a maximum of 30 characters.   
+
+Format: ZMXXFM_DDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMOTCFM_ORDER_ACK
+
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+2
+Application Type
+‘FM’
+1
+Separator
+‘_’
+22-23
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+
+
+
+ Business Object Repository (BOR)
+
+Description
+The BOR is a central repository within the SAP System, containing all the SAP business object types and SAP interface types together with their definitions and methods. The BOR provides a means for creating/maintaining and displaying business objects and is closely coupled with the BAPI explorer
+The business object repository involves three objects:
+* Business object types
+* Business object interface types
+* Business Application Programming Interface(BAPI)
+The core object is the object type.
+
+Business object type 
+
+When creating a business object type name, the form object:
+* Must begin with a ‘YM’ or ‘ZM’
+* Generic definition of business objects. Describes the general characteristics and common attributes of instances of SAP business object types.  Initially, only the internal key was used, but the extensive use of business objects has given rise to the need for addressing those using names.  The ID must identify an object type uniquely. An ID has ten characters. It must begin with an uppercase letter. This can be followed by uppercase letters, digits and underscores.  
+* Can be a maximum of 10 characters.   
+Convention using number:
+Format: ZMBUS99999
+Example:  ZMBUS90002
+Length
+Description
+Values
+2
+Form Identifier
+‘YM’ or ‘ZM’
+3
+Constant 
+‘BUS’
+5
+Numeric range
+Numeric range from 90001 to 99999.
+Convention using name:
+Format: ZMAA_DDDDD
+Example:  ZMOTC_BSOBJ
+Length
+Description
+Values
+2
+Form Identifier
+‘YM’ or ‘ZM’
+2
+Application Area 
+Appendix ‘A’
+6
+Descriptive Text
+Descriptive/meaning name
+
+
+Business Object Repository (BOR), Continued
+
+Business interface type 
+
+When creating a business interface type name, the form object:
+* Must begin with a ‘YM’ or ‘ZM’
+* Interface types are definitions of attributes, methods and events grouped together in one context. An object type can support one or more interface types. The functional group of associated attributes, methods and events defined for the interface type together with their interfaces are used by the object type and are inherited by the respective subtypes of the object.  
+* Can be a maximum of 10 characters.   
+Convention using number:
+Format: ZMIF999999
+Example:  ZMIF900005
+Length
+Description
+Values
+2
+Form Identifier
+‘YM’ or ‘ZM’
+2
+Constant 
+‘IF’
+6
+Numeric range
+Numeric range from 900001 to 999999.
+Convention using name:
+Format: ZMIFAADDDDD
+Example:  ZMIFOTCBSIT
+Length
+Description
+Values
+2
+Form Identifier
+‘YM’ or ‘ZM’
+2
+Constant 
+‘IF’
+2
+Application Area 
+Appendix ‘A’
+4
+Descriptive Text
+Descriptive/meaning name
+
+
+Business Object Repository (BOR), Continued
+
+Method 
+When creating a business object method, the object name:
+* Must begin with ‘Z’
+* Can be a maximum of 30 characters.   
+Format: Z  _ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  Z_CREATE_ORDER
+Length
+Description
+Values
+1
+Custom Identifier
+‘Z’
+1
+Separator
+‘_’
+28
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Method parameters
+When creating parameters for a method, the object name:
+* Must begin with ‘I’, ‘E’, C’, or ‘R’ to denote Importing, Exporting, Changing, or Returning.
+* Can be a maximum of 30 characters.   
+* Where it makes sense, include the name of the SAP data dictionary type in the object name.  Otherwise use a meaningful description.
+Format: T_DDDDDDDDDDDDDDDDDDDDDDDDDDDD 
+Example:  R_KUNNR_SOLDTO
+Length
+Description
+Values
+1
+Parameter Type
+‘I’, ‘E’, or ‘C’
+1
+Separator
+‘_’
+28
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+BAPI
+
+
+When creating a business application programming interface name, the form object:
+* Must begin with ‘Z_MBAPI’
+* The BAPI function module is just and RFC that is created/named in a specific way.  The function modules are then assigned/attached to a business object.
+* Can be a maximum of 30 characters.   
+Format: Z_MBAPIDDDDDDDDDDDDDDDDDDDDDDD
+Example:  Z_MBAPI_ZOTC_BUSOBJ_FUNCTION
+
+
+Length
+Description
+Values
+1
+Form Identifier
+‘Z’
+6
+Constant
+‘_MBAPI’
+10
+Object Name
+Business object/business interface name
+13
+Method Name
+Method for which the function module is being implemented
+
+
+Workflow
+
+
+Standard Task
+
+
+When creating a standard workflow task, the abbreviation:
+o Must begin with ‘ZM’
+o Must define it as Dialog or Background
+o Can be a maximum of 12 characters.   
+
+Format: ZMTDDDDDDDDD
+Example:  ZMDSETAPPROV
+	
+Length
+Description
+Values
+2
+Form Identifier
+‘ZM’
+1
+Task Type
+‘D’ for dialog and ‘B’ for background
+9
+Unique Description
+Alphanumeric.  Underscores are valid.
+
+
+
+
+
+Task Group
+
+
+When creating a task group, the abbreviation:
+o Must begin with ‘ZM’
+o Must have the Task Group identifier ‘G’
+o Can be a maximum of 12 characters.   
+
+Format: ZMGDDDDDDDDD
+Example:  ZMGORDAPPROV
+	
+Length
+Description
+Values
+2
+Form Identifier
+‘ZM’
+1
+Task Group Identifier
+‘G’
+9
+Unique Description
+Alphanumeric.  Underscores are valid.
+
+
+Workflow Template
+
+
+
+When creating a workflow template, the abbreviation:
+o Must begin with ‘ZM’
+o Must denote the application area
+o Can be a maximum of 12 characters.   
+
+Format: ZMXXDDDDDDDD
+Example:  ZMOTC_OR_EXP
+
+Length
+Description
+Values
+2
+Form Identifier
+‘ZM’
+2
+Application Area 
+Appendix ‘A’
+8
+Unique Description
+Alphanumeric.  Underscores are valid.
+
+
+
+
+
+SAP Query
+
+Description
+The SAP Query application is used to create reports.  It has been designed for users with little or no knowledge of the ABAP. SAP Query offers users a broad range of ways to define reports and create different types of reports such as basic lists, statistics, and ranked lists. 
+* SAP Query is not to be used.
+
+
+Electronic data exchange (EDI) / Intermediate document (IDoc)
+
+Description
+The IDoc is the entity which provides the mechanisms for integrating SAP to standard EDI technologies/protocols/requirements. The IDoc interface exchanges business data with external systems. The IDoc interface consists of the definition of a data structure, along with processing logic for this data structure.
+The data structure is the IDoc. The IDoc is the exchange format common to all the communicating systems. You can specify exception handling in the SAP Business Workflow, without the data already having to exist as SAP application documents.
+The IDoc interface can be utilized in the following scenarios:
+* Electronic data exchange (EDI)
+* Connect other business application systems
+* Application Link Enabling (ALE): it a technology to create and run distributed applications.
+The IDoc technologies include ten areas related to naming conventions.
+* Ports
+* Partners.
+* Segment types
+* Segment definition
+* Message type
+* Idoc type
+* Process code
+* Inbound Function modules
+* Outbound function modules
+
+Partner Profile (WE20)           
+When creating a partner profile, it is composed of two fields
+* The partner type  / The partner number
+* In the section for “Post Processing permitted Agent”, specify a type of ‘S’ for Position, and an Agent from the organization model.  Do not use a specific userid.
+Format:  TT PPPPPPPPPP
+Example:  LS LS_GXS
+Length
+Description
+Values
+2
+Partner Type
+‘B’ = Bank
+‘KU’ = Customer
+‘LI’ = Vendor
+‘LS’ = Logical System
+10
+Partner Number
+For B, use Bank identifier
+For KU, use SAP Customer number.
+For LI, use SAP Vendor number
+For LS, use SAP Logical System
+
+
+Electronic data exchange (EDI) / Intermediate document (IDOC), Continued
+
+Port (WE21)           
+When creating a port, the object name:
+* Must begin with ‘ZM’    Can be a maximum of 10 characters.   
+* Usage: Logical name for where files are stored at the Operating System level.  For EDI, include the transaction set number and the direction (in or out)
+Format:  ZMXX_DDDDD
+Example: ZMFI_820IN 
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Component
+Appendix ‘A’
+1
+Separator
+‘_’ 
+4-5
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Partners
+A partner is an entity which exists in SAP.  The partner profiles controls how external systems communicate with the partner.   You must maintain the partners with whom you communicate via IDocs in the partner profiles.
+
+There are seven partner types; banks, Benefits provider, Business partner, Customer, Vendor, Logical system and user.  The naming convention for the partners is controlled by the source object within SAP. Meaning the partner for customers is controlled by the customer number in SAP.
+
+Logical System (BD54)
+When creating a logical system, the object name:
+* Must begin with ‘LS_’
+* Can be a maximum of 10 characters.   
+* Usage: Unique identifier that represents a physical external system
+Format: LS_DDDDDDD   
+Example:  LS_GXS
+Length
+Description
+Values
+3
+Custom Identifier
+‘LS_’
+7
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+Electronic data exchange (EDI) / Intermediate document (IDOC), Continued
+
+Message type 
+
+When creating a message type name, the form object:
+* Must begin with a ‘ZM’
+* Message types are generic messages. They represent a basic object.  Can be associated to a business object in the BOR.  A message type can be associated to multiple idoc types.  For example, the message type ORDERS, represent purchase orders (outbound) and sales orders (inbound).  
+* Can be a maximum of 30 characters.   
+Convention with application area:
+Format: ZMAAA_DDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMOTC_MESSAGE_TYPE
+Length
+Description
+Values
+2
+Form Identifier
+‘ZM’
+2
+Application Area 
+Appendix ‘A’
+26
+Descriptive Text
+Descriptive/meaning name
+Convention without application area:
+Format: ZMDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZM_MESSAGE_TYPE
+Length
+Description
+Values
+2
+Form Identifier
+‘YM’ or ‘ZM’
+28
+Descriptive Text
+Descriptive/meaning name
+
+Idoc Extension
+When creating an Idoc Extension, the object name:
+* Must begin with ‘ZME’
+* Can be a maximum of 30 characters.   If copying an existing Idoc, include the original Idoc name in the description of the Idoc Extension.
+Format: ZME DDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMEINVOIC01
+Length
+Description
+Values
+3
+Custom Identifier
+‘ZME’
+27
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+Electronic data exchange (EDI) / Intermediate document (IDoc), Continued
+
+Idoc Logical Message
+When creating an Idoc Logical Message, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+Format: ZM DDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZM_810_OUTBOUND_INVOICE
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+28
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Idoc Segment
+When creating an Idoc Segment, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+Format: ZM DDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZM1KNA1
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+28
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Idoc Type
+When creating an Idoc Type, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+Format: ZM DDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMINVOIC01
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+28
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+Electronic data exchange (EDI) / Intermediate document (IDOC), Continued
+
+Inbound Process Code (WE42)
+When creating an inbound process code, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+Format: ZMXX _ DDDDDDDDDDDDDDDDDDDDDDDDD 
+Example: ZMGL_IN_821
+Length
+Description
+Values
+2
+Custom identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+24-25
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Inbound IDoc function module
+
+When creating an inbound IDoc function module name, the form object:
+* Must begin with ‘Z_MIDOCINPUT’
+* Can be a maximum of 30 alphanumeric.   
+Format: Z_MIDOCINPUTAADDDDDDDDDDDDDD
+Example:  Z_MIDOCINPUT_OTC_FNCTN_MODULE
+Length
+Description
+Values
+1
+Form Identifier
+‘Z’
+11
+Constant
+‘M_IDOCINPUT’
+2-3
+Application Area
+Appendix ‘A’
+15-16
+Descriptive Text
+Descriptive/meaning name
+
+
+Electronic data exchange (EDI) / Intermediate document (IDOC), Continued
+
+Outbound IDoc function module
+
+When creating an outbound IDoc function module name, the form object:
+* Must begin with ‘Z_MIDOCOUTPUT’
+* Can be a maximum of 30 alphanumeric.   
+Format: Z_MIDOCOUTPUTAADDDDDDDDDDDDD
+Example:  Z_MIDOCOUTPUTOTC_FNCTN_MODULE
+Length
+Description
+Values
+1
+Form Identifier
+‘Z’
+12
+Constant
+‘_MIDOCOUTPUT’
+2-3
+Application Area
+Appendix ‘A’
+14-15
+Descriptive Text
+Descriptive/meaning name
+
+
+File
+
+Overview
+
+All files should be created as logical files in SAP.  This will allow for easy file path changes in the future and provides the ability to determine a filename regardless of the operating system of the server.  
+
+Logical files are created in the transaction FILE by the Basis team.  
+
+
+Inbound file
+When creating a inbound file name, the object name:
+* Must begin with ‘ZMI’
+* Can be a maximum of 30 characters.   
+Format: ZMIXX _ DDDDDDDDDDDDDDDDDDDD .EXT 
+Example: ZMISTS_SVRREPAIR .DAT
+Length
+Description
+Values
+3
+Custom identifier
+‘ZMI’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+23-24
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Outbound file
+When creating a outbound file name, the object name:
+* Must begin with ‘ZMO’
+* Can be a maximum of 30 characters.   
+Format: ZMOXX _ DDDDDDDDDDDDDDDDDDDD .EXT 
+Example: ZMOSTS_SVRCOSTS .DAT
+Length
+Description
+Values
+3
+Custom identifier
+‘ZMO’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+23-24
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+4
+File extension
+‘.DAT’, ‘.PRN’, ‘.TXT’, etc 
+
+
+Authorizations
+
+Authorization field
+When creating an authorization field, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 10 characters.   
+Format: ZM XX _ DDDDD  
+Example:  ZMSTS_CAF01
+Length 
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+4-5
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Authorization object
+When creating an authorization object, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 10 characters.   
+Format: ZM XX _ DDDDD  
+Example:  ZMPS_CAF00
+Length 
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+4-5
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Authorization group (for tables SE54)
+When creating an authorization group, the object name:
+* Must begin with ‘Z’
+* Can be a maximum of 4 characters.   
+* If more than one authorization group is required for an application area, the first two characters of the application area followed by a number should be used.  Example ZOT1, ZOT2, etc.
+Format: ZAAA 
+Example:  ZOTC
+Length 
+Description
+Values
+1
+Custom Identifier
+‘Z’
+2-3
+Application Area
+Appendix ‘A’
+
+Authorization group (for report programs SE38)
+When creating an authorization group, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 8 characters.   
+Format: ZMAAADDD 
+Example:  ZMOTC, ZMSTSPO
+Length 
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+3-4
+Free Form Text
+
+
+
+Jobs
+
+Batch input session
+When creating a batch input session, the object name:
+* Must match originating program transaction code
+* Can be a maximum of 12 characters.   
+Format: ZMXXDDDDDDDD 
+Example:  ZMCTCUSRSTAT
+Length
+Description
+Values
+12
+Program Transaction Code
+ This is the unique 12 character alphanumeric transaction code assigned to a program.  
+
+Batch job
+When creating a background job, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 32 characters.   
+Format: ZM XX _ F L CC _ DDDDDDDDDDDDDDDDDDDDDD
+Example: ZMSTS_DAUS_AR_TRIAL_BALANCE_RPT
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+1
+Run Frequency ID
+Appendix ‘C’
+1
+Location Id
+‘E’ = EMEA, ‘A’ = Americas, 
+‘P’ = Asia/Pacific, ‘G’  = Global
+2
+Country Code
+Alpha
+1
+Separator
+‘_’
+21-22
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+Jobs, Continued
+
+Business Object
+When creating a business object, the object name:
+* Must begin with ‘ZMBUS’
+* Can be a maximum of 10 characters.   
+Format: ZM BUSDDDDD
+Example: ZMBUS2032
+Length
+Description
+Values
+5
+Custom Identifier
+‘ZMBUS’
+5
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Event (job execution)
+When creating an event (Job Execution), the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+Format: ZM  XX _ DDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZMPP_STARTSERVICE
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Area
+Appendix ‘A’
+1
+Separator
+‘_’
+24-25
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+Event (Objects)
+When creating an event (Objects), the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+Format: ZM  _ DDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZM_COMPANY_CODE_CHANGE
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+1
+Separator
+‘_’
+27
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+Misc.
+
+Memory storage ID
+When creating a memory storage ID, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 40 characters.   
+Format: ZM _ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+Example:  ZM_ZRPM0049_GET_MATNR
+                 ZM_CL_IMP_GET_MATERALS
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+1
+Separator
+‘_’
+37
+Unique Identifier
+Alphanumeric.  Underscores are valid. Identifier can indicate the program or Class which uses the memory ID
+
+Message Class
+When creating a message ID, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 20 characters. 
+* Message ID’s are created by the Application Team via Transaction code SE80.
+* Usage:  A message class contains one or more related messages and externalizes message text from application logic.  
+Format: ZM XX _ DDDDDDDDDDDDDDD  
+Example:  ZMSTS_MATERIAL_MGMT
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+2-3
+Application Identification
+Appendix ‘A’
+1
+Separator
+‘_’
+14-15
+Unique Identifier
+Alphanumeric.  Underscores are valid.
+
+
+Misc, Continued
+
+TVARV entry
+When creating a TVARV entry, the object name:
+* Must begin with ‘ZM’
+* Can be a maximum of 30 characters.   
+Format: ZM X _ DDDDDDDDDDDDDDDDDDDDDDDDDD  
+Example:  ZMP_ORDER_FULFIL_EXTRACT_DATE
+Length
+Description
+Values
+2
+Custom Identifier
+‘ZM’
+1
+TVARV Type
+‘P’ - parameter, ‘S’ – selection
+1
+Separator
+‘_’
+26
+Unique Identifier
+Alphanumeric.  Underscores are valid. 
+
+Variant
+When creating a variant, the object name:
+* Can be a maximum of 14 characters.
+* Usage: A variant is an object that contains a set of pre-defined selection criteria used when a program is executed (typically in batch).
+Format: DDDDDDDDDDDDDD
+Example:  DAILY_BATCH
+Length
+Description
+Values
+14
+Unique Identifier
+Alphanumeric.  Underscores are valid. 
+
+
+Appendix A
+
+Application area
+When naming standards specify the need for an application area, use the following table to determine appropriate values:
+
+Description
+Code
+Conversions
+CNV
+EDI
+EDI
+Cross-Application Components   
+CA
+Enterprise Portal   
+EP
+Master Data Management
+MDM
+Finance
+FI
+Order-to-Cash
+OTC
+Pricing
+PRC
+Source to Settle
+STS
+Plan to Stock
+PTS
+Customer to Contract
+CTC
+Business Intelligence
+BIA
+Manage Warehouse and Logistics
+WM
+
+
+Appendix B
+
+Application type
+When naming standards specify the need for an application type, use the following table to determine appropriate values:
+
+Description
+Code
+Conversion
+CV
+Enhancement
+EN
+Extract (interface outbound)
+EX
+Form
+FM
+Include
+IL
+Interface (inbound) 
+IN
+Report (List)
+RP
+Workflow
+WF
+Utility
+UT
+
+
+Appendix C
+
+Run frequency identifier
+When naming standards specify the need for a run frequency ID, use the following table to determine appropriate values:
+
+Description
+Code
+Annual
+A
+Bimonthly
+B
+Cyclic (pattern, ex.- every 3rd workday) 
+C
+Daily
+D
+Event-Driven (not based upon any scheduling criteria)
+E
+Hourly
+H
+Monthly
+M
+On Request
+R
+Quarterly
+Q
+Semi-annual
+S
+Weekly
+W
+
+Appendix D
+
+Program Object Type Identifiers
+
+When declaring an object (variable, data type, etc.) in your code, the following identifiers should be used:
+
+
+Object Type
+Identifier
+Constant
+C
+Structure (work area)
+X
+Parameter
+P
+Select-Option
+S
+Variable 
+V
+Internal Table
+T
+Class Object
+O
+Interface
+IF
+Data Object
+DO
+Data Type
+TY
+
+
+
+
+
+
+
+SAP ABAP Naming Standards
+Document Number: Version 1.9
+
+
+
+
+
+Page 1 of 76
+IT IS THE RESPONSIBILITY OF THE USER TO VERIFY THIS IS THE CORRECT VERSION.
+
+
+
+
+
+
